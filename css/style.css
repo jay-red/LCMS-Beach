@@ -1,5 +1,6 @@
 body {
-	background: url( '../images/background.png' );
+	background: url( '../images/sky.png' );
+	background-size: 100% 100%;
 }
 h1, h2, h3, p, a, label, span, button {
 	font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
