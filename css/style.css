@@ -1,19 +1,33 @@
 body {
-	background: lightBlue;
+	background: url( '../images/background.png' );
+}
+h1, h2, h3, p, a, label, span, button {
+	font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+}
+h1 {
+	margin-top: 0px;
 }
 #wrapper {
 	margin:auto;
 	width: 820px;
-	background: blue;
+	background: #458B74;
 	border-radius: 5px;
 	padding: 10px;
 }
 #content {
 	background: white;
 	border-radius: 5px;
-	width: 800px;
+	width: 780px;
+	padding: 20px;
+}
+.icons {
+	float: left;
 	padding: 10px;
 }
-h1 {
-	margin-top: 0px;
+.timeButton {
+	border-radius: 5px;
+	background: lightBlue;
+	padding: 5px;
+	color: white;
+	font-size: 20px;
 }

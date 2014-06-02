@@ -3,7 +3,7 @@ $( document ).ready( function(){
 		
 	}
 	function distanceMatrix( longitude, latitude ) {
-		var queryString = longitude.toString() + ',' + latitude.toString(),
+		var queryString = latitude.toString() + ',' + longitude.toString(),
 			dest = 'Oceanside+Pier+CA+92054',
 			xhr = new XMLHttpRequest(),
 			resp;
@@ -17,7 +17,10 @@ $( document ).ready( function(){
 			xhr.send();
 	}
 	function showPosition( position ) {
+		$( '.timeButton' ).fadeOut( 500 );
 		distanceMatrix( position.coords.longitude, position.coords.latitude );
 	}
-	navigator.geolocation.getCurrentPosition(showPosition);
+	$( '.timeButton' ).click( function(){
+		navigator.geolocation.getCurrentPosition(showPosition);
+	});
 });
