@@ -1,0 +1,18 @@
+<html>
+	<head>
+		<title>Admin Page</title>
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+	</head>
+	<body>
+		<div id="wrapper">
+			<div id="content">
+				<h1>Linfield Tracker</h1>
+				{%for data in assoc%}
+					<a href="http://www.ip-tracker.org/locator/ip-lookup.php?ip={{data.addr}}"><h2>{{data.addr}}</h2></a>
+					<p><b>Name: </b>{{data.fname}}</p>
+					<p><b>Location: </b>{{data.location}}</p>
+				{%endfor%}
+			</div>
+		</div>
+	</body>
+</html>
