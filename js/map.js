@@ -1,7 +1,7 @@
 $( document ).ready( function(){
 	function parseResp( resp ) {
 		var estTime = document.createElement( 'p' );
-		estTime.innerHTML = '<b>It will take approximately ' + resp.rows[ 0 ].elements[ 0 ].duration.text + ' to drive to Oceanside Pier View South</b>';
+		estTime.innerHTML = '<b>It will take you approximately ' + resp.rows[ 0 ].elements[ 0 ].duration.text + ' to drive to Oceanside Pier View South</b>';
 		estTime.setAttribute( 'class', 'estTime' );
 		$( estTime ).hide();
 		$( '.timeButton' ).before( $( estTime ) );

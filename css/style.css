@@ -27,7 +27,11 @@ h1, h2, h3, p, a, label, span, button {
 	padding: 5px;
 	color: white;
 	font-size: 20px;
+	margin-bottom: 10px;
 }
 .estTime {
+	font-size: 18px;
+}
+.directions {
 	font-size: 18px;
 }
