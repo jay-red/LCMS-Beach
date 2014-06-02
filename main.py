@@ -75,10 +75,6 @@ class InfoHandler(Handler):
     def get(self):
         self.render('info.html')
 
-class ContactHandler(Handler):
-    def get(self):
-        self.render('contact.html')
-
 class RSVPHandler(Handler):
     def get(self):
         self.render('rsvp.html')
@@ -144,7 +140,6 @@ class AdminHandler(Handler):
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/info', InfoHandler),
-    ('/contact', ContactHandler),
     ('/rsvp', RSVPHandler),
     ('/map', MapHandler),
     ('/api', APIHandler),
