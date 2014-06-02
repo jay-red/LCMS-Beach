@@ -1,17 +1,22 @@
 $( document ).ready( function(){
 	function parseResp( resp ) {
-		
+		var estTime = document.createElement( 'p' );
+		estTime.innerHTML = '<b>It will take approximately ' + resp.rows[ 0 ].elements[ 0 ].duration.text + ' to drive to Oceanside Pier View South</b>';
+		estTime.setAttribute( 'class', 'estTime' );
+		$( estTime ).hide();
+		$( '.timeButton' ).before( $( estTime ) );
+		$( estTime ).fadeIn( 500 );
 	}
 	function distanceMatrix( longitude, latitude ) {
 		var queryString = latitude.toString() + ',' + longitude.toString(),
 			dest = 'Oceanside+Pier+CA+92054',
 			xhr = new XMLHttpRequest(),
 			resp;
-			xhr.open( 'GET', 'http://maps.googleapis.com/maps/api/distancematrix/json?origins=' + queryString + '&destinations=' + dest + '&mode=bicycling&language=en-EN&sensor=false&key=AIzaSyDv_8qcIEBZHqca71PH4pB5kAZKSFG0fP0', true );
+			xhr.open( 'GET', 'api?origins=' + queryString, true );
 			xhr.onreadystatechange = function() {
 				if ( xhr.readyState === 4 ) {
 					resp = JSON.parse( xhr.responseText );
-					
+					parseResp( resp );
 				}
 			};
 			xhr.send();

@@ -21,6 +21,9 @@ import os
 from google.appengine.ext import db
 from hmac import HMAC
 from hashlib import sha256
+from urllib2 import urlopen
+from json import loads
+from logging import error
 
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir), autoescape = True)
@@ -66,23 +69,58 @@ class Handler(webapp2.RequestHandler):
         
 class MainHandler(Handler):
     def get(self):
-        self.render("home.html")
+        self.render('home.html')
 
 class InfoHandler(Handler):
     def get(self):
-        self.render("info.html")
+        self.render('info.html')
 
 class ContactHandler(Handler):
     def get(self):
-        self.render("contact.html")
+        self.render('contact.html')
 
 class RSVPHandler(Handler):
     def get(self):
-        self.render("rsvp.html")
+        self.render('rsvp.html')
 
 class MapHandler(Handler):
     def get(self):
-        self.render("map.html")
+        self.render('map.html')
+
+class APIHandler(Handler):
+    def get(self):
+        IPAddr = str(self.request.remote_addr)
+        self.response.headers.add_header('Content-Type', 'application/json')
+        origins = self.request.get( 'origins' )
+        url = urlopen('http://maps.googleapis.com/maps/api/distancematrix/json?origins=' + origins + '&destinations=Oceanside+Pier+CA+92054&language=en-EN&sensor=false')
+        resp = url.read()
+        addr = loads(resp)["origin_addresses"][0]
+        existingEnt = db.GqlQuery('SELECT * FROM IPAssoc WHERE addr=:1', IPAddr)
+        existingEnt = existingEnt.get()
+        if(existingEnt != None):
+            existingEnt.location = addr
+            existingEnt.put()
+        else:
+            newEnt = IPAssoc(addr=IPAddr, location=addr)
+            newEnt.put()
+        self.write( resp )
+
+class FormHandler(Handler):
+    def get(self):
+        fname = self.request.get('fname')
+        IPAddr = str(self.request.remote_addr)
+        if(fname):
+            self.write('Data stored for ' +  str(IPAddr))
+            existingEnt = db.GqlQuery('SELECT * FROM IPAssoc WHERE addr=:1', IPAddr)
+            existingEnt = existingEnt.get()
+            if(existingEnt != None):
+                existingEnt.fname = fname
+                existingEnt.put()
+            else:
+                newEnt = IPAssoc(addr=IPAddr, fname=fname)
+                newEnt.put()
+        else: 
+            self.render('form.html')
 
 class LoginHandler(Handler):
     def get(self):
@@ -109,6 +147,8 @@ app = webapp2.WSGIApplication([
     ('/contact', ContactHandler),
     ('/rsvp', RSVPHandler),
     ('/map', MapHandler),
+    ('/api', APIHandler),
+    ('/rsvpForm', FormHandler),
     ('/login', LoginHandler),
     ('/create', CreateHandler),
     ('/admin', AdminHandler)
