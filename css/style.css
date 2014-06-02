@@ -5,6 +5,9 @@ body {
 h1, h2, h3, p, a, label, span, button {
 	font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
 }
+p {
+	font-size: 18px;
+}
 #wrapper {
 	margin:auto;
 	width: 820px;
@@ -31,8 +34,11 @@ h1, h2, h3, p, a, label, span, button {
 	margin-bottom: 10px;
 }
 .estTime {
-	font-size: 18px;
+	font-size: 20px;
 }
 .directions {
-	font-size: 18px;
+	font-size: 20px;
+}
+.icLabel {
+	font-size: 20px;
 }
