@@ -7,7 +7,7 @@ $( document ).ready( function(){
 			dest = 'Oceanside+Pier+CA+92054',
 			xhr = new XMLHttpRequest(),
 			resp;
-			xhr.open( 'GET', 'http://maps.googleapis.com/maps/api/distancematrix/json?origins=' + queryString + '&destinations=' + dest + '&mode=bicycling&language=en-EN&sensor=false', true );
+			xhr.open( 'GET', 'http://maps.googleapis.com/maps/api/distancematrix/json?origins=' + queryString + '&destinations=' + dest + '&mode=bicycling&language=en-EN&sensor=false&key=AIzaSyDv_8qcIEBZHqca71PH4pB5kAZKSFG0fP0', true );
 			xhr.onreadystatechange = function() {
 				if ( xhr.readyState === 4 ) {
 					resp = JSON.parse( xhr.responseText );
